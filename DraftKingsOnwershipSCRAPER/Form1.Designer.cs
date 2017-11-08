@@ -84,7 +84,6 @@ namespace DraftKingsOnwershipSCRAPER
             this.ScrapySharpTest.TabIndex = 4;
             this.ScrapySharpTest.Text = "ScrapySharpTest";
             this.ScrapySharpTest.UseVisualStyleBackColor = true;
-       
             // 
             // GetPlayerTags
             // 
