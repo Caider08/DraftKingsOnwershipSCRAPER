@@ -35,6 +35,7 @@ namespace DraftKingsOnwershipSCRAPER
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.navigate = new System.Windows.Forms.Button();
             this.ScrapySharpTest = new System.Windows.Forms.Button();
+            this.BrowserTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.playerTagsGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,11 +86,23 @@ namespace DraftKingsOnwershipSCRAPER
             this.ScrapySharpTest.Text = "ScrapySharpTest";
             this.ScrapySharpTest.UseVisualStyleBackColor = true;
             // 
+            // BrowserTest
+            // 
+            this.BrowserTest.BackColor = System.Drawing.Color.Transparent;
+            this.BrowserTest.Location = new System.Drawing.Point(563, 455);
+            this.BrowserTest.Name = "BrowserTest";
+            this.BrowserTest.Size = new System.Drawing.Size(138, 63);
+            this.BrowserTest.TabIndex = 5;
+            this.BrowserTest.Text = "BrowserTest";
+            this.BrowserTest.UseVisualStyleBackColor = false;
+            this.BrowserTest.Click += new System.EventHandler(this.button1_Click);
+            // 
             // GetPlayerTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1337, 537);
+            this.Controls.Add(this.BrowserTest);
             this.Controls.Add(this.ScrapySharpTest);
             this.Controls.Add(this.navigate);
             this.Controls.Add(this.webBrowser1);
@@ -112,6 +125,7 @@ namespace DraftKingsOnwershipSCRAPER
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button navigate;
         private System.Windows.Forms.Button ScrapySharpTest;
+        private System.Windows.Forms.Button BrowserTest;
     }
 }
 

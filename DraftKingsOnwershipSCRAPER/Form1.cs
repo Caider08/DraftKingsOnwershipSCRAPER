@@ -73,21 +73,28 @@ namespace DraftKingsOnwershipSCRAPER
 
         private void SiteLogIn_Click(object sender, EventArgs e)
         {
-            var webBrowser1 = new FSloginCookies();
-            webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            var client = new FSloginCookies();
+            HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
 
-            HtmlAgilityPack.HtmlDocument docu = webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            var testid = clientDoc.GetElementbyId("main");
 
-           // var inputEmail = webBrowser1.Document.GetElementById("email");
-           // inputEmail.Focus();
-           // inputEmail.InnerText = "caiderwaider@hotmail.com";
+            var headertest = testid.NodeType;
 
-          //  var inputPassword = webBrowser1.Document.GetElementById("password");
-          //  inputPassword.Focus();
-           // inputPassword.InnerText = "soccer08FS";
+            //var webBrowser1 = new FSloginCookies();
+            // webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
-           // var submit = webBrowser1.Document.GetElementById("submit");
-           // submit.InvokeMember("click");
+            //HtmlAgilityPack.HtmlDocument docu = webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+
+            // var inputEmail = webBrowser1.Document.GetElementById("email");
+            // inputEmail.Focus();
+            // inputEmail.InnerText = "caiderwaider@hotmail.com";
+
+            //  var inputPassword = webBrowser1.Document.GetElementById("password");
+            //  inputPassword.Focus();
+            // inputPassword.InnerText = "soccer08FS";
+
+            // var submit = webBrowser1.Document.GetElementById("submit");
+            // submit.InvokeMember("click");
 
             System.Threading.Thread.Sleep(5);
 
@@ -191,6 +198,16 @@ namespace DraftKingsOnwershipSCRAPER
 
         private void ScrapySharpTest_Click(object sender, EventArgs e)
         {
+
+            var client = new FSloginCookies();
+            HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
+
+            var testid = clientDoc.GetElementbyId("main");
+
+            var headertest = testid.NodeType;
+
+            System.Threading.Thread.Sleep(5);
+
             // ScrapingBrowser Browser = new ScrapingBrowser();
             // Browser.AllowAutoRedirect = true;
             // Browser.AllowMetaRedirect = true;
@@ -203,14 +220,21 @@ namespace DraftKingsOnwershipSCRAPER
 
             //11.07.17
 
-            var tableGrab = webBrowser1.Document.GetElementsByTagName("tbody");
+            //var tableGrab = webBrowser1.Document.GetElementsByTagName("tbody");
 
 
-            var table2Grab = webBrowser1.Document.GetElementById("dataTables_scrollBody");
+            //var table2Grab = webBrowser1.Document.GetElementById("dataTables_scrollBody");
 
 
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CookieBrowser b = new CookieBrowser();
+            b.Get("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            b.FormElements["email"] = "caiderwaider@hotmail.com";
+
+
+        }
     }
 }
