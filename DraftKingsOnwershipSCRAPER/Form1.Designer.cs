@@ -95,7 +95,7 @@ namespace DraftKingsOnwershipSCRAPER
             this.BrowserTest.TabIndex = 5;
             this.BrowserTest.Text = "BrowserTest";
             this.BrowserTest.UseVisualStyleBackColor = false;
-            this.BrowserTest.Click += new System.EventHandler(this.button1_Click);
+            this.BrowserTest.Click += new System.EventHandler(this.BrowserTest_Click);
             // 
             // GetPlayerTags
             // 

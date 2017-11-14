@@ -228,11 +228,37 @@ namespace DraftKingsOnwershipSCRAPER
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BrowserTest_Click(object sender, EventArgs e)
         {
+            //CookieBrowser b = new CookieBrowser();
+            //  b.Get("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            // b.FormElements["email"] = "caiderwaider@hotmail.com";
+
             CookieBrowser b = new CookieBrowser();
-            b.Get("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            var testTrends = b.Get("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            //MessageBox.Show(testTrends);
+
+            var countInputs = b.FormElements.Count();
+            var firstInput = b.FormElements.Keys.Last();
+            //MessageBox.Show(firstInput);
+
             b.FormElements["email"] = "caiderwaider@hotmail.com";
+            b.FormElements["password"] = "DKscrape";
+
+           
+
+            var formInputCheck = b.FormElements["password"].ToString();
+            //MessageBox.Show(formInputCheck);
+
+            var response = b.Post("https://www.fansharesports.com/shared/authenticate/credentials?redirectUrl=%2Fgolf%2Ftrends");
+
+            //MessageBox.Show(response);
+            response = b.Get2("https://www.fansharesports.com/golf/analytics/tags");
+            MessageBox.Show(response);
+
+
+
+            System.Threading.Thread.Sleep(5);
 
 
         }

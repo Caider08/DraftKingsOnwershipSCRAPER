@@ -118,7 +118,7 @@ namespace DraftKingsOnwershipSCRAPER
                 }
 
                 Cookies.Add(response.Cookies);
-                
+                cookieJar.Add(Cookies);
             }
         }
 

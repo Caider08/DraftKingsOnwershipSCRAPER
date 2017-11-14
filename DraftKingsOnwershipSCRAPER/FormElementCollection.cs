@@ -22,7 +22,9 @@ namespace DraftKingsOnwershipSCRAPER
                 {
                     string name = element.GetAttributeValue("name", "undefined");
                     string value = element.GetAttributeValue("value", "");
-                    if (!name.Equals("undefined")) Add(name, value);
+                    //if (ContainsKey(name) & ContainsValue(value)) Remove(name);
+                    if (!name.Equals("undefined") && !ContainsKey(name)) Add(name, value);
+                    
                 }
             }
 
