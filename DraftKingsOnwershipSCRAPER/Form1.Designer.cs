@@ -36,6 +36,7 @@ namespace DraftKingsOnwershipSCRAPER
             this.navigate = new System.Windows.Forms.Button();
             this.ScrapySharpTest = new System.Windows.Forms.Button();
             this.BrowserTest = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.playerTagsGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@ namespace DraftKingsOnwershipSCRAPER
             this.playerTagsGridView.Location = new System.Drawing.Point(729, 12);
             this.playerTagsGridView.Name = "playerTagsGridView";
             this.playerTagsGridView.RowTemplate.Height = 24;
-            this.playerTagsGridView.Size = new System.Drawing.Size(596, 477);
+            this.playerTagsGridView.Size = new System.Drawing.Size(596, 412);
             this.playerTagsGridView.TabIndex = 0;
             this.playerTagsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -97,11 +98,22 @@ namespace DraftKingsOnwershipSCRAPER
             this.BrowserTest.UseVisualStyleBackColor = false;
             this.BrowserTest.Click += new System.EventHandler(this.BrowserTest_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(729, 460);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 57);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // GetPlayerTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1337, 537);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.BrowserTest);
             this.Controls.Add(this.ScrapySharpTest);
             this.Controls.Add(this.navigate);
@@ -126,6 +138,7 @@ namespace DraftKingsOnwershipSCRAPER
         private System.Windows.Forms.Button navigate;
         private System.Windows.Forms.Button ScrapySharpTest;
         private System.Windows.Forms.Button BrowserTest;
+        private System.Windows.Forms.Button button1;
     }
 }
 

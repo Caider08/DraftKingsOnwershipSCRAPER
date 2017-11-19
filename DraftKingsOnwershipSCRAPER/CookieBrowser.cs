@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DraftKingsOnwershipSCRAPER
 {
-    class CookieBrowser
+    class CookieBrowser : WebBrowser
     {
         private bool _isPost;
         private HtmlAgilityPack.HtmlDocument _htmlDoc;
@@ -37,6 +37,7 @@ namespace DraftKingsOnwershipSCRAPER
         private HtmlWeb CreateWebRequestObject()
         {
             HtmlWeb web = new HtmlWeb();
+           
             web.UseCookies = true;
             web.PreRequest = new HtmlWeb.PreRequestHandler(OnPreRequest);
             web.PostResponse = new HtmlWeb.PostResponseHandler(OnAfterResponse);
@@ -86,14 +87,14 @@ namespace DraftKingsOnwershipSCRAPER
             }
         }
 
-        public string Get2(string url)
+        public HtmlAgilityPack.HtmlDocument Get2(string url)
         {
             HtmlWeb web = new HtmlWeb();
             web.UseCookies = true;
             web.PreRequest = new HtmlWeb.PreRequestHandler(OnPreRequest2);
             web.PostResponse = new HtmlWeb.PostResponseHandler(OnAfterResponse2);
             HtmlAgilityPack.HtmlDocument doc = web.Load(url);
-            return doc.DocumentNode.InnerHtml;
+            return doc;
         }
 
         public bool OnPreRequest2(HttpWebRequest request)

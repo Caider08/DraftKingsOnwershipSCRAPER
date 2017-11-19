@@ -18,9 +18,32 @@ namespace DraftKingsOnwershipSCRAPER
     {
         DataTable table1;
 
+        public WebBrowser webBroswer1 = new WebBrowser();
+
+        
+
+        public CookieContainer cookies2 = new CookieContainer();
+
+        public CookieContainer GetCookieContainer()
+        {
+            CookieContainer container = new CookieContainer();
+
+            foreach (string cookie in webBrowser1.Document.Cookie.Split(';'))
+            {
+                string name = cookie.Split('=')[0];
+                string value = cookie.Substring(name.Length + 1);
+                string path = "/";
+                string domain = "https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends"; //change to your domain name
+                container.Add(new Cookie(name.Trim(), value.Trim(), path, domain));
+            }
+
+            return container;
+        }
+
         public GetPlayerTags()
         {
             InitializeComponent();
+            this.webBrowser1.ObjectForScripting = new MyScript();
             
         }
 
@@ -43,7 +66,7 @@ namespace DraftKingsOnwershipSCRAPER
 
         }
 
-        private async void GetPlayerTags_Load(object sender, EventArgs e)
+        private  void GetPlayerTags_Load(object sender, EventArgs e)
         {
             InitTable();
             //var proxy = WebRequest.GetSystemWebProxy();
@@ -51,20 +74,36 @@ namespace DraftKingsOnwershipSCRAPER
             proxy1.UseDefaultCredentials = false;
 
             //var webBrowser1 = new FSloginCookies();
-           // webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            // webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
             //HtmlAgilityPack.HtmlDocument docu = webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
+            using (CookieAwareWebClient client = new CookieAwareWebClient())
+            {
+                client.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+                client.DownloadData("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
-            webBrowser1.Navigate("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+                webBrowser1.Navigate("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+
+                System.Threading.Thread.Sleep(5);
+
+            }
+
+           
+
+
+
+            System.Threading.Thread.Sleep(5);
+
+            //CookieContainer cookies = GetCookieContainer();
 
             // System.Diagnostics.Process.Start("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
 
-            HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument weeksTags = await Task.Factory.StartNew(() => web.Load("https://stackoverflow.com/questions/23298532/htmlagilitypack-and-authentication"));
-            var node = weeksTags.DocumentNode.SelectNodes("//*[@id=\"question\"]/table//tr[1]/td[2]/div/div[2]/a[1]");
-            var innerTexts = node.Select(x => x.InnerText);
+            //HtmlWeb web = new HtmlWeb();
+            //HtmlAgilityPack.HtmlDocument weeksTags = await Task.Factory.StartNew(() => web.Load("https://stackoverflow.com/questions/23298532/htmlagilitypack-and-authentication"));
+            //var node = weeksTags.DocumentNode.SelectNodes("//*[@id=\"question\"]/table//tr[1]/td[2]/div/div[2]/a[1]");
+            //var innerTexts = node.Select(x => x.InnerText);
             //HtmlAgilityPack.HtmlDocument weeksTags = await Task.Factory.StartNew(() => web.Load("https://www.fansharesports.com/golf/analytics/tags", "GET",  proxy1, new NetworkCredential { UserName = "caiderwaider@hotmail.com", Password = "soccer08FS"}));
            // var node = weeksTags.DocumentNode.SelectNodes("//*[@id=\"DataTables_Table_0\"]//tr[1]/td[2]/a");
             
@@ -73,30 +112,48 @@ namespace DraftKingsOnwershipSCRAPER
 
         private void SiteLogIn_Click(object sender, EventArgs e)
         {
-            var client = new FSloginCookies();
-            HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
+            // var client = new FSloginCookies();
+            // HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
 
-            var testid = clientDoc.GetElementbyId("main");
+            //var testid = clientDoc.GetElementbyId("main");
 
-            var headertest = testid.NodeType;
+            //  var headertest = testid.NodeType;
 
-            //var webBrowser1 = new FSloginCookies();
-            // webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
+            // var webBrowser1 = new FSloginCookies();
+            // webBrowser1.Navigate("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
-            //HtmlAgilityPack.HtmlDocument docu = webBrowser1.GetPage("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
-            // var inputEmail = webBrowser1.Document.GetElementById("email");
-            // inputEmail.Focus();
-            // inputEmail.InnerText = "caiderwaider@hotmail.com";
 
-            //  var inputPassword = webBrowser1.Document.GetElementById("password");
-            //  inputPassword.Focus();
-            // inputPassword.InnerText = "soccer08FS";
+            //System.Threading.Thread.Sleep(5);
+            // HtmlAgilityPack.HtmlDocument docu = webBrowser1.Navigate("https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends");
 
-            // var submit = webBrowser1.Document.GetElementById("submit");
-            // submit.InvokeMember("click");
+            //System.Windows.Forms.HtmlDocument doc2 = webBroswer1.Document;
 
-            System.Threading.Thread.Sleep(5);
+            
+
+            //foreach (string cookie in doc2.Cookie.Split(';'))
+           // {
+                //string name = cookie.Split('=')[0];
+                //string value = cookie.Substring(name.Length + 1);
+                //string path = "/";
+                //string domain = "https://www.fansharesports.com/shared/signIn?redirectUrl=%2Fgolf%2Ftrends";
+                //cookies2.Add(new Cookie(name.Trim(), value.Trim(), path, domain));
+            //}
+
+             var inputEmail = webBrowser1.Document.GetElementById("email");
+             inputEmail.Focus();
+             inputEmail.InnerText = "caiderwaider@hotmail.com";
+
+             var inputPassword = webBrowser1.Document.GetElementById("password");
+             inputPassword.Focus();
+             inputPassword.InnerText = "DKscrape";
+
+             var submit = webBrowser1.Document.GetElementById("submit");
+             submit.InvokeMember("click");
+             
+            
+         
+            //webBrowser1.Navigate("https://www.fansharesports.com/shared/authenticate/credentials?redirectUrl=%2Fgolf%2Ftrends");
 
             //var fafabar = webBrowser1.Document.GetElementById("hdr-mobile-menu");
             //fafabar.InvokeMember("click");
@@ -162,24 +219,99 @@ namespace DraftKingsOnwershipSCRAPER
 
         private void navigate_Click(object sender, EventArgs e)
         {
+            using ( CookieAwareWebClient client = new CookieAwareWebClient())
+            {
+                client.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+                client.DownloadData("https://www.fansharesports.com/golf/trends");
 
-            webBrowser1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
+                webBrowser1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
 
-            System.Threading.Thread.Sleep(5);
+                System.Threading.Thread.Sleep(5);
+ 
+            }
 
-            var selectDIVwrapper = webBrowser1.Document.GetElementById("DataTables_Table_0_length");
 
-            var selectDiv = selectDIVwrapper.GetElementsByTagName("select");
+
+
+        
+
+           // webBroswer1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
+
+            //webBroswer1.Navigate("");
+
+            //webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(clickFilter);
+
+            //void clickFilter(object sender2, WebBrowserDocumentCompletedEventArgs e2)
+           // {
+              //  var dataLength = ((WebBrowser)sender2).Document.GetElementById("DataTables_Table_0_length");
+
+               // var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
+
+                //var options = select.GetElementsByTagName("option");
+
+                //foreach (HtmlElement option in options)
+                //{
+                   // if (option.GetAttribute("value").Equals(100))
+                   // {
+                       // option.Focus();
+                    //    option.InvokeMember("click");
+                   // }
+                //}
+           // }
+
+            //System.Threading.Thread.Sleep(15);
+
+          //  while (webBroswer1.Document.Body == null)
+           // {
+           //     Application.DoEvents();
+           // }
+
+            
+
+            //System.Windows.Forms.HtmlDocument docu = webBroswer1.Document;
+
+            
+
+           // var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+           // var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
+
+            //var options = select.GetElementsByTagName("option");
+
+          //  foreach (HtmlElement option in options)
+           // {
+              //  if (option.GetAttribute("value").Equals(100))
+              //  {
+              //      option.Focus();
+              //      option.InvokeMember("click");
+              //  }
+           // }
+
+
+
+           // System.Threading.Thread.Sleep(5);
+
+            // System.Threading.Thread.Sleep(5);
+
+            // var selectDIVwrapper = webBrowser1.Document.GetElementById("DataTables_Table_0_length");
+
+            // var selectDiv = selectDIVwrapper.GetElementsByTagName("select");
 
             //var selector = selectDIV.GetElementsByTagName("select");
 
 
-            System.Threading.Thread.Sleep(5);
+            //System.Threading.Thread.Sleep(5);
 
-            var tableGrab = webBrowser1.Document.GetElementsByTagName("tbody");
+            // var tableGrab = webBrowser1.Document.GetElementsByTagName("tbody");
 
 
-            var table2Grab = webBrowser1.Document.GetElementById("dataTables_scrollBody");
+            // var table2Grab = webBrowser1.Document.GetElementById("dataTables_scrollBody");
 
             //var navbar = webBrowser1.Document.GetElementById("#hdr-mobile-menu");
 
@@ -199,14 +331,50 @@ namespace DraftKingsOnwershipSCRAPER
         private void ScrapySharpTest_Click(object sender, EventArgs e)
         {
 
-            var client = new FSloginCookies();
-            HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
+           // webBroswer1.Navigate("https://www.fansharesports.com/golf");
 
-            var testid = clientDoc.GetElementbyId("main");
+            webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(clickFilter);
 
-            var headertest = testid.NodeType;
+            void clickFilter(object sender2, WebBrowserDocumentCompletedEventArgs e2)
+            {
+                
+            }
+
+            var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+            var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
+
+            //var options = select.GetElementsByTagName("option");
+
+            foreach (HtmlElement option in options)
+            {
+                if (option.GetAttribute("value").Equals(100))
+                {
+                    option.Focus();
+                    option.InvokeMember("click");
+                }
+            }
+
+
+
+
+
 
             System.Threading.Thread.Sleep(5);
+
+
+
+          //  var client = new FSloginCookies();
+            //HtmlAgilityPack.HtmlDocument clientDoc = client.GetPage("https://www.fansharesports.com/golf/trends");
+
+            //var testid = clientDoc.GetElementbyId("main");
+
+            //var headertest = testid.NodeType;
+
+          //  System.Threading.Thread.Sleep(5);
 
             // ScrapingBrowser Browser = new ScrapingBrowser();
             // Browser.AllowAutoRedirect = true;
@@ -251,10 +419,49 @@ namespace DraftKingsOnwershipSCRAPER
             //MessageBox.Show(formInputCheck);
 
             var response = b.Post("https://www.fansharesports.com/shared/authenticate/credentials?redirectUrl=%2Fgolf%2Ftrends");
+           // MessageBox.Show(response);
 
             //MessageBox.Show(response);
-            response = b.Get2("https://www.fansharesports.com/golf/analytics/tags");
-            MessageBox.Show(response);
+            var response2 = b.Get2("https://www.fansharesports.com/golf/analytics/tags");
+
+            //WORKING way down to Table via Divs
+            var wrapperDiv = response2.DocumentNode.SelectSingleNode("//div[@id='content-wrap']");
+            var mainDiv = response2.DocumentNode.SelectSingleNode("//div[@id='main']");
+            var tableRow = mainDiv.SelectSingleNode("//*[@id='main']/div[2]");
+            var tableMidDivs = tableRow.SelectSingleNode("//*[@id='main']/div[2]/div[2]");
+            var tableTest = tableMidDivs.Elements("table").First();
+            //var tableBody = tableTest.Elements("tbody").First();
+
+            //var tableTry = response2.DocumentNode.SelectSingleNode("//tbody");
+
+            //var tester = mainDiv.SelectSingleNode("//*[@id='DataTables_Table_0']");
+
+            //var tableDiv = wrapperDiv.SelectSingleNode("//div[@id='DataTables_Table_0_wrapper']");
+            //*[@id="DataTables_Table_0"];
+
+            MessageBox.Show(tableTest.OuterHtml);
+
+            //*[@id="DataTables_Table_0"]
+
+            var htmlTextTest = response2.DocumentNode.InnerHtml;
+
+            // MessageBox.Show(htmlTextTest);
+
+            // var tableFind = response2.DocumentNode.CssSelect("DataTables_Table_0'").First();
+
+            // var TableFindMore = tableFind.SelectNodes("//tr");
+
+            //*[@id="DataTables_Table_0_wrapper"]/div[2]/div/div[1]/div[2]
+
+
+            // var tableTest = response2.DocumentNode.SelectNodes("//*[@id='DataTables_Table_0']").First();
+            //var tableTestRows = tableTest.SelectNodes(".//tr").ToArray();
+
+            //var firstRow = tableTestRows.First();
+
+
+            //MessageBox.Show(firstRow.GetType().ToString());
+
 
 
 
@@ -262,5 +469,45 @@ namespace DraftKingsOnwershipSCRAPER
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            
+
+            //webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(clickFilter);
+
+            // void clickFilter(object sender2, WebBrowserDocumentCompletedEventArgs e2)
+            //{
+
+            // };
+
+            //var docu = webBroswer1.Document;
+
+            // var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+            // var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
+
+            //var options = select.GetElementsByTagName("option");
+
+           // foreach (HtmlElement option in options)
+           // {
+               // if (option.GetAttribute("value").Equals(100))
+                //{
+                //    option.Focus();
+                  //  option.InvokeMember("click");
+                //}
+           // }
+
+
+
+            System.Threading.Thread.Sleep(5);
+
+
+        }
+
     }
 }
