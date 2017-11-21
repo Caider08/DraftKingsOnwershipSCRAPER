@@ -66,7 +66,7 @@ namespace DraftKingsOnwershipSCRAPER
 
         }
 
-        private  void GetPlayerTags_Load(object sender, EventArgs e)
+        private void GetPlayerTags_Load(object sender, EventArgs e)
         {
             InitTable();
             //var proxy = WebRequest.GetSystemWebProxy();
@@ -233,69 +233,69 @@ namespace DraftKingsOnwershipSCRAPER
 
 
 
-        
 
-           // webBroswer1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
+
+            // webBroswer1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
 
             //webBroswer1.Navigate("");
 
             //webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(clickFilter);
 
             //void clickFilter(object sender2, WebBrowserDocumentCompletedEventArgs e2)
-           // {
-              //  var dataLength = ((WebBrowser)sender2).Document.GetElementById("DataTables_Table_0_length");
+            // {
+            //  var dataLength = ((WebBrowser)sender2).Document.GetElementById("DataTables_Table_0_length");
 
-               // var options = dataLength.Document.GetElementsByTagName("option");
-
-
-
-
-                //var options = select.GetElementsByTagName("option");
-
-                //foreach (HtmlElement option in options)
-                //{
-                   // if (option.GetAttribute("value").Equals(100))
-                   // {
-                       // option.Focus();
-                    //    option.InvokeMember("click");
-                   // }
-                //}
-           // }
-
-            //System.Threading.Thread.Sleep(15);
-
-          //  while (webBroswer1.Document.Body == null)
-           // {
-           //     Application.DoEvents();
-           // }
-
-            
-
-            //System.Windows.Forms.HtmlDocument docu = webBroswer1.Document;
-
-            
-
-           // var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
-
-           // var options = dataLength.Document.GetElementsByTagName("option");
+            // var options = dataLength.Document.GetElementsByTagName("option");
 
 
 
 
             //var options = select.GetElementsByTagName("option");
 
-          //  foreach (HtmlElement option in options)
-           // {
-              //  if (option.GetAttribute("value").Equals(100))
-              //  {
-              //      option.Focus();
-              //      option.InvokeMember("click");
-              //  }
-           // }
+            //foreach (HtmlElement option in options)
+            //{
+            // if (option.GetAttribute("value").Equals(100))
+            // {
+            // option.Focus();
+            //    option.InvokeMember("click");
+            // }
+            //}
+            // }
+
+            //System.Threading.Thread.Sleep(15);
+
+            //  while (webBroswer1.Document.Body == null)
+            // {
+            //     Application.DoEvents();
+            // }
 
 
 
-           // System.Threading.Thread.Sleep(5);
+            //System.Windows.Forms.HtmlDocument docu = webBroswer1.Document;
+
+
+
+            // var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+            // var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
+
+            //var options = select.GetElementsByTagName("option");
+
+            //  foreach (HtmlElement option in options)
+            // {
+            //  if (option.GetAttribute("value").Equals(100))
+            //  {
+            //      option.Focus();
+            //      option.InvokeMember("click");
+            //  }
+            // }
+
+
+
+            // System.Threading.Thread.Sleep(5);
 
             // System.Threading.Thread.Sleep(5);
 
@@ -326,6 +326,8 @@ namespace DraftKingsOnwershipSCRAPER
             //   ele.InvokeMember("Click");
             //}
             //}
+
+            System.Threading.Thread.Sleep(5);
         }
 
         private void ScrapySharpTest_Click(object sender, EventArgs e)
@@ -472,8 +474,32 @@ namespace DraftKingsOnwershipSCRAPER
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-            
+            using (CookieAwareWebClient client = new CookieAwareWebClient())
+            {
+                client.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+                client.DownloadData("https://www.fansharesports.com/golf/trends");
+
+                webBrowser1.Navigate("https://www.fansharesports.com/golf/analytics/tags");
+
+                while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+                {
+                    System.Threading.Thread.Sleep(5);
+
+                }             
+                //var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+                //var options = dataLength.Document.GetElementsByTagName("option");
+
+                //webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+
+            }
+
+            var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+            var options = dataLength.Document.GetElementsByTagName("option");
+
+
+
 
             //webBroswer1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(clickFilter);
 
@@ -482,9 +508,11 @@ namespace DraftKingsOnwershipSCRAPER
 
             // };
 
+
+
             //var docu = webBroswer1.Document;
 
-            // var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+            // var dataLength = docu.GetElementById("DataTables_Table_0_length");
 
             // var options = dataLength.Document.GetElementsByTagName("option");
 
@@ -493,21 +521,57 @@ namespace DraftKingsOnwershipSCRAPER
 
             //var options = select.GetElementsByTagName("option");
 
-           // foreach (HtmlElement option in options)
-           // {
-               // if (option.GetAttribute("value").Equals(100))
-                //{
-                //    option.Focus();
-                  //  option.InvokeMember("click");
-                //}
-           // }
+            // foreach (HtmlElement option in options)
+            // {
+            // if (option.GetAttribute("value").Equals(100))
+            //{
+            //    option.Focus();
+            //  option.InvokeMember("click");
+            //}
+            // }
 
 
 
             System.Threading.Thread.Sleep(5);
+           
 
 
         }
 
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs events)
+        {
+            if (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+            {
+                return;
+            }
+
+            else
+            {
+                var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+                string dataLengthText = dataLength.InnerHtml;
+
+                MessageBox.Show(dataLengthText);
+
+                var options = dataLength.Document.GetElementsByTagName("option");
+
+                return;
+            }
+        }
+
+        private void BrowserDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs events)
+        {
+            if (events.Url.AbsolutePath != ((WebBrowser)sender).Url.AbsolutePath)
+                return;
+            else
+            {
+                var dataLength = webBroswer1.Document.GetElementById("DataTables_Table_0_length");
+
+                var options = dataLength.Document.GetElementsByTagName("option");
+
+                System.Threading.Thread.Sleep(5);
+            }
+
+        }
     }
 }
